@@ -1,4 +1,4 @@
-package prj5;
+package project5;
 
 
 import student.TestCase;
@@ -7,16 +7,16 @@ public class SongTest extends TestCase {
 
    
         
-        private song song1;
-        private song song2;
-        private song song3;
+        private Song song1;
+        private Song song2;
+        private Song song3;
         
         
         public void setUp()
         {
-            song1 = new song("Travis Scott", "Butterfly Effect", "Pop", 2018);
-            song2 = new song("Travis Scott", "Sicko Mode", "Pop", 2018);
-            song3 = new song("Travis Scott", "Butterfly Effect", "Pop", 2018);
+            song1 = new Song("Travis Scott", "Butterfly Effect", "Pop", 2018);
+            song2 = new Song("Travis Scott", "Sicko Mode", "Pop", 2018);
+            song3 = new Song("Travis Scott", "Butterfly Effect", "Pop", 2018);
         }
         
         public void testGetArtist()
