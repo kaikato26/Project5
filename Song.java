@@ -53,7 +53,17 @@ public class Song {
         return this.date;
 
     }
-
+    
+    public String toString()
+    {
+       StringBuilder str = new StringBuilder();
+       str.append("Song Title: " + title);
+       str.append("\nArtist: " + artist);
+       str.append("\nGenre: " + genre);
+       str.append("\nYear: " + date);
+    
+       return str.toString();
+    }
 
     @Override
     public boolean equals(Object obj) {
