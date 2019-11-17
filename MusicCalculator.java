@@ -1,28 +1,54 @@
-package Proj5;
+/**
+ * 
+ */
+package project5;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * @author anamk
+ *
+ */
 public class MusicCalculator {
 
     private LinkedList<Glyph> glyphList;
     private ArrayList<Song> songList;
 
 
-    public MusicCalculator(
-        ArrayList<Song> songList,
-        ArrayList<Person> personList) {
-        this.songList = songList;
-        for (int i = 0; i < songList.size(); i++) {
-            glyphList.add(new Glyph(songList.get(i)));
+    public MusicCalculator(ArrayList<Song> songs, ArrayList<Person> persons) {
+        this.songList = songs;
+        this.glyphList = fillGlyphList(songs, persons);
+
+    }
+
+
+    private LinkedList<Glyph> fillGlyphList(
+        ArrayList<Song> songs,
+        ArrayList<Person> persons) {
+
+        LinkedList<Glyph> glyphList = new LinkedList<Glyph>();
+
+        for (int i = 0; i < songs.size(); i++) {
+
+            glyphList.add(new Glyph(songs.get(i)));
+
+            for (int j = 0; j < persons.size(); j++) {
+
+                glyphList.get(i).addResult(persons.get(j), i);
+
+            }
+
         }
+        return glyphList;
     }
 
 
     public LinkedList<Glyph> sortGlyphs(String sortCriteria) {
+        
         LinkedList<Glyph> copyGlyph = new LinkedList<Glyph>();
         LinkedList<String> sortList = new LinkedList<String>();
-        Iterator<Glyph> it = glyphList.iterator();
+        Iterator<Glyph> it = this.glyphList.iterator();
 
         if (sortCriteria.equals("date")) {
             LinkedList<Integer> songDates = new LinkedList<Integer>();
@@ -111,4 +137,5 @@ public class MusicCalculator {
         }
 
     }
+
 }

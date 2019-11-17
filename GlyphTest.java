@@ -70,14 +70,10 @@ public class GlyphTest extends student.TestCase {
             glyph4.addResult(test7, 3);
             glyph4.addResult(test8, 3);
             
+            //System.out.println(glyph2);
             
+            assertEquals(glyph2.getHobbyMap().get(Hobby.ART)[0], 1);
             
-            
-            
-            System.out.println(glyph1);
-            System.out.println(glyph2);
-            System.out.println(glyph3);
-            System.out.println(glyph4);
         
     }
     

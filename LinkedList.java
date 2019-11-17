@@ -1,8 +1,8 @@
 package project5;
 
 import java.util.Iterator;
-
 import java.util.NoSuchElementException;
+
 
 /**
  * This provides implementation for some of the LList methods.
@@ -123,13 +123,49 @@ public class LinkedList<E> {
     }
 
 
-    public void quickSort() {
-        
-        
-        
+    @SuppressWarnings("unchecked")
+    private void insertInOrder(Node<E> nodeToInsert) {
+        E item = nodeToInsert.getData();
+        Node<E> firstNode = head.next;
+        Node<E> currentNode = firstNode;
+        Node<E> previousNode = null;
+
+        while ((currentNode != null) && ((item.toString()).compareTo(currentNode
+            .getData().toString()) > 0)) {
+            previousNode = currentNode;
+            currentNode = currentNode.next();
+        }
+
+        if (previousNode != null) {
+            previousNode.setNext(nodeToInsert);
+            nodeToInsert.setNext(currentNode);
+        }
+        else {
+            nodeToInsert.setNext(firstNode);
+            firstNode = nodeToInsert;
+        }
     }
-    
-    
+
+
+    public void sort() {
+        Node<E> firstNode = head.next;
+
+        if (this.size > 1) {
+            assert firstNode != null;
+
+            Node<E> unsortedPart = firstNode.next();
+            assert unsortedPart != null;
+            firstNode.setNext(null);
+            while (unsortedPart != null) {
+                Node<E> nodeToInsert = unsortedPart;
+                unsortedPart = unsortedPart.next();
+                insertInOrder(nodeToInsert);
+            }
+        }
+
+    }
+
+
     /**
      * Initializes the object to have the head and tail nodes
      */
@@ -337,20 +373,20 @@ public class LinkedList<E> {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("{");
+        StringBuilder builder = new StringBuilder();
         if (!isEmpty()) {
             Node<E> currNode = head.next();
             while (currNode != tail) {
                 E element = currNode.getData();
                 builder.append(element.toString());
                 if (currNode.next != tail) {
-                    builder.append(", ");
+                    builder.append("\n\n\n");
                 }
                 currNode = currNode.next();
             }
         }
 
-        builder.append("}");
+        
         return builder.toString();
     }
 
