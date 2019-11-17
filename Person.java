@@ -103,7 +103,34 @@ public class Person {
             default:
                 return null;
         }
-
     }
+    
+    public boolean equals(Object obj) {
+
+    if (obj == null) {
+        return false;
+    }
+
+     if (obj == this) {
+        return true;
+    }
+
+    if (this.getClass() == (obj.getClass())) {
+
+        Person person = (Person)obj;
+        
+        return (this.getHobby() == (person.getHobby())
+            && (this.getMajor() == (person.getMajor())
+            && (this.getRegion() == (person.getRegion())
+            && (this.getResults().equals(person.getResults()));
+    }
+
+    return false;
+
+}  
+        
+        
+
+    
 
 }
