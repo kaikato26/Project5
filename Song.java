@@ -53,7 +53,8 @@ public class Song {
         return this.date;
 
     }
-    
+
+
     public String toString()
     {
        StringBuilder str = new StringBuilder();
@@ -64,7 +65,7 @@ public class Song {
     
        return str.toString();
     }
-
+    
     @Override
     public boolean equals(Object obj) {
 

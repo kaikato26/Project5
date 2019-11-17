@@ -62,7 +62,7 @@ public class Person {
                 return Hobby.SPORTS;
             case "music":
                 return Hobby.MUSIC;
-            case "read":
+            case "reading":
                 return Hobby.READ;
             default:
                 return null;
@@ -92,9 +92,9 @@ public class Person {
     private Region stringToRegion(String region) {
 
         switch (region) {
-            case "southeast us":
+            case "southeast":
                 return Region.SOUTHEAST_US;
-            case "northeast us":
+            case "northeast":
                 return Region.NORTHEAST_US;
             case "outside the us":
                 return Region.OUTSIDE_THE_US;
@@ -103,34 +103,32 @@ public class Person {
             default:
                 return null;
         }
+
     }
-    
+
+
     public boolean equals(Object obj) {
 
-    if (obj == null) {
+        if (obj == null) {
+            return false;
+        }
+
+         if (obj == this) {
+            return true;
+        }
+
+        if (this.getClass() == (obj.getClass())) {
+
+            Person person = (Person)obj;
+            
+            return (this.getHobby() == (person.getHobby()))
+                && (this.getMajor() == (person.getMajor()))
+                && (this.getRegion() == (person.getRegion()))
+                && (this.getResults().equals(person.getResults()));
+        }
+
         return false;
+
     }
-
-     if (obj == this) {
-        return true;
-    }
-
-    if (this.getClass() == (obj.getClass())) {
-
-        Person person = (Person)obj;
-        
-        return (this.getHobby() == (person.getHobby())
-            && (this.getMajor() == (person.getMajor())
-            && (this.getRegion() == (person.getRegion())
-            && (this.getResults().equals(person.getResults()));
-    }
-
-    return false;
-
-}  
-        
-        
-
-    
 
 }

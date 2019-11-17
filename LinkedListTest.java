@@ -513,8 +513,18 @@ public class LinkedListTest extends TestCase {
         list.add("j");
         list.add("k");
         
-        list.sort();
+        list = list.sort();
         assertEquals(list.toString(), "a\n\n\nb\n\n\nj\n\n\nk\n\n\nz");
+        
+        LinkedList<Integer> temp = new LinkedList<Integer>();
+        temp.add(5);
+        temp.add(5);
+        temp.add(3);
+        temp.add(7);
+        temp.add(1);
+        temp = temp.sort();
+        assertEquals(temp.toString(), "1\n\n\n3\n\n\n5\n\n\n5\n\n\n7");
+        
     }
 
 }

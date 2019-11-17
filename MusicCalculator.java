@@ -48,15 +48,16 @@ public class MusicCalculator {
         
         LinkedList<Glyph> copyGlyph = new LinkedList<Glyph>();
         LinkedList<String> sortList = new LinkedList<String>();
-        Iterator<Glyph> it = this.glyphList.iterator();
+        
 
         if (sortCriteria.equals("date")) {
             LinkedList<Integer> songDates = new LinkedList<Integer>();
             for (int i = 0; i < songList.size(); i++) {
                 songDates.add(glyphList.get(i).getSong().getDate());
             }
-            songDates.sort();
-            for (int i = 0; i < sortList.size(); i++) {
+            songDates = songDates.sort();
+            for (int i = 0; i < songDates.size(); i++) {
+                Iterator<Glyph> it = this.glyphList.iterator();
                 while (it.hasNext()) {
                     Glyph glyph = it.next();
                     if (songDates.get(i).equals(glyph.getSong().getDate())) {
@@ -67,8 +68,9 @@ public class MusicCalculator {
 
                 }
             }
-            glyphList = copyGlyph;
+            this.setGlyphList(copyGlyph);
             return glyphList;
+            
         }
 
         switch (sortCriteria) {
@@ -76,8 +78,9 @@ public class MusicCalculator {
                 for (int i = 0; i < songList.size(); i++) {
                     sortList.add(glyphList.get(i).getSong().getTitle());
                 }
-                sortList.sort();
+                sortList = sortList.sort();
                 for (int i = 0; i < sortList.size(); i++) {
+                    Iterator<Glyph> it = this.glyphList.iterator();
                     while (it.hasNext()) {
                         Glyph glyph = it.next();
                         if (sortList.get(i).equals(glyph.getSong()
@@ -89,15 +92,16 @@ public class MusicCalculator {
 
                     }
                 }
-                glyphList = copyGlyph;
+                this.setGlyphList(copyGlyph);
                 return glyphList;
 
             case "genre":
                 for (int i = 0; i < songList.size(); i++) {
                     sortList.add(glyphList.get(i).getSong().getGenre());
                 }
-                sortList.sort();
+                sortList = sortList.sort();
                 for (int i = 0; i < sortList.size(); i++) {
+                    Iterator<Glyph> it = this.glyphList.iterator();
                     while (it.hasNext()) {
                         Glyph glyph = it.next();
                         if (sortList.get(i).equals(glyph.getSong()
@@ -109,15 +113,16 @@ public class MusicCalculator {
 
                     }
                 }
-                glyphList = copyGlyph;
+                this.setGlyphList(copyGlyph);
                 return glyphList;
 
             case "artist":
                 for (int i = 0; i < songList.size(); i++) {
                     sortList.add(glyphList.get(i).getSong().getArtist());
                 }
-                sortList.sort();
+                sortList = sortList.sort();
                 for (int i = 0; i < sortList.size(); i++) {
+                    Iterator<Glyph> it = this.glyphList.iterator();
                     while (it.hasNext()) {
                         Glyph glyph = it.next();
                         if (sortList.get(i).equals(glyph.getSong()
@@ -129,13 +134,24 @@ public class MusicCalculator {
 
                     }
                 }
-                glyphList = copyGlyph;
+                this.setGlyphList(copyGlyph);
                 return glyphList;
 
             default:
                 return null;
         }
 
+    }
+    
+    public LinkedList<Glyph> getGlyphList(){
+        
+        return this.glyphList;
+        
+    }
+    
+    public void setGlyphList(LinkedList<Glyph> glyphList) {
+        
+        this.glyphList = glyphList;
     }
 
 }

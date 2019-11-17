@@ -123,46 +123,34 @@ public class LinkedList<E> {
     }
 
 
-    @SuppressWarnings("unchecked")
-    private void insertInOrder(Node<E> nodeToInsert) {
-        E item = nodeToInsert.getData();
-        Node<E> firstNode = head.next;
-        Node<E> currentNode = firstNode;
-        Node<E> previousNode = null;
-
-        while ((currentNode != null) && ((item.toString()).compareTo(currentNode
-            .getData().toString()) > 0)) {
-            previousNode = currentNode;
-            currentNode = currentNode.next();
+    public LinkedList<E> sort() {
+        
+        LinkedList<E> tempSort = new LinkedList<E>();
+        if(this.size <= 1) {
+            return this;
         }
-
-        if (previousNode != null) {
-            previousNode.setNext(nodeToInsert);
-            nodeToInsert.setNext(currentNode);
-        }
-        else {
-            nodeToInsert.setNext(firstNode);
-            firstNode = nodeToInsert;
-        }
-    }
-
-
-    public void sort() {
-        Node<E> firstNode = head.next;
-
-        if (this.size > 1) {
-            assert firstNode != null;
-
-            Node<E> unsortedPart = firstNode.next();
-            assert unsortedPart != null;
-            firstNode.setNext(null);
-            while (unsortedPart != null) {
-                Node<E> nodeToInsert = unsortedPart;
-                unsortedPart = unsortedPart.next();
-                insertInOrder(nodeToInsert);
+        tempSort.add(this.get(0));
+        for(int i = 1; i < this.size; i++) {
+            
+            E curr = this.get(i);
+            boolean addCheck = false;
+            for(int j = 0; j < tempSort.size; j++) {
+                
+                E innerCurr = tempSort.get(j);
+                if((curr.toString()).compareTo(innerCurr.toString()) < 0) {
+                    tempSort.add(j, curr);
+                    addCheck = true;
+                    break;
+                }
+                
             }
+            
+            if(!addCheck) {
+                tempSort.add(curr);
+            }
+            
         }
-
+        return tempSort;
     }
 
 
