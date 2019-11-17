@@ -17,6 +17,7 @@ public class PersonTest extends student.TestCase {
     private Person test6;
     private Person test7;
     private Person test8;
+    private Person test9;
 
 
     public void setUp() {
@@ -27,6 +28,7 @@ public class PersonTest extends student.TestCase {
             "united states (other than southeast or northwest)", test3);
         test8 = new Person("sports", "other engineering", "outside the us",
             test4);
+        test9 = new Person("art", "computer science", "southeast us", test1);
 
     }
 
@@ -68,6 +70,18 @@ public class PersonTest extends student.TestCase {
         assertEquals(test7.getResults(), test3);
         assertEquals(test8.getResults(), test4);
 
+    }
+    
+     public void testEquals() {
+    
+        Object obj = null;
+        assertFalse(test5.equals(obj));
+
+        obj = new Object();
+        assertFalse(test5.equals(obj)); 
+
+        assertTrue(test5.equals(test9));
+        assertFalse(test5.equals(test6));
     }
 
 }
