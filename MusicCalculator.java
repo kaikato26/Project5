@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * @author anamk
- *
+ * @author Alex Namkung (anamkung)
+ * @version 11/15/19
+ * @author Kai Kato (kaikato26)
+ * @version 11/15/19
+ * @author Sam Hita (samhita7)
+ * @version 11/15/19
  */
 public class MusicCalculator {
 
@@ -16,6 +20,15 @@ public class MusicCalculator {
     private ArrayList<Song> songList;
 
 
+    /**
+     * constructor for the music calculator class
+     * fills a list of glyphs with fillGlyphMethod
+     * 
+     * @param songs
+     *            to be filled in glyphlist
+     * @param persons
+     *            to be filled in glyphlist
+     */
     public MusicCalculator(ArrayList<Song> songs, ArrayList<Person> persons) {
         this.songList = songs;
         this.glyphList = fillGlyphList(songs, persons);
@@ -23,31 +36,47 @@ public class MusicCalculator {
     }
 
 
+    /**
+     * helper method that fills up the glyph list with the songs and persons
+     * 
+     * @param songs
+     *            for glyphs
+     * @param persons
+     *            for results
+     * @return a linkedlist of glyphs filled with results
+     */
     private LinkedList<Glyph> fillGlyphList(
         ArrayList<Song> songs,
         ArrayList<Person> persons) {
 
-        LinkedList<Glyph> glyphList = new LinkedList<Glyph>();
-        
+        LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
+
         int len = songs.size();
-        
 
-        for (int i = 0; i <len; i++) {
+        for (int i = 0; i < len; i++) {
 
-            glyphList.add(new Glyph(songs.get(i)));
+            glyphs.add(new Glyph(songs.get(i)));
 
             for (int j = 0; j < persons.size(); j++) {
 
-                glyphList.get(i).addResult(persons.get(j), 2 * i);
-                glyphList.get(i).addResult(persons.get(j), 2 * i + 1);
-                
+                glyphs.get(i).addResult(persons.get(j), 2 * i);
+                glyphs.get(i).addResult(persons.get(j), 2 * i + 1);
+
             }
 
         }
-        return glyphList;
+        return glyphs;
     }
 
 
+    /**
+     * sorts the glyph list based on the sort criteria
+     * uses the sort method in linked list
+     * 
+     * @param sortCriteria
+     *            criteria for glyph list to be sorted
+     * @return the sorted glyph list
+     */
     public LinkedList<Glyph> sortGlyphs(String sortCriteria) {
 
         LinkedList<Glyph> copyGlyph = new LinkedList<Glyph>();
@@ -147,6 +176,11 @@ public class MusicCalculator {
     }
 
 
+    /**
+     * getter for the glyphList
+     * 
+     * @return LinkedList<Glyph> glyphList
+     */
     public LinkedList<Glyph> getGlyphList() {
 
         return this.glyphList;
@@ -154,6 +188,12 @@ public class MusicCalculator {
     }
 
 
+    /**
+     * sets the glyphList
+     * 
+     * @param glyphList
+     *            to be set
+     */
     public void setGlyphList(LinkedList<Glyph> glyphList) {
 
         this.glyphList = glyphList;

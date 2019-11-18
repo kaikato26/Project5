@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @version 11/15/19
  * @author Kai Kato (kaikato26)
  * @version 11/15/19
- * @author Sam
+ * @author Sam Hita (samhita7)
  * @version 11/15/19
  * @param <E>
  *            The type of object the class will store

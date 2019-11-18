@@ -8,7 +8,7 @@ package prj5;
  * @version 11/15/19
  * @author Kai Kato (kaikato26)
  * @version 11/15/19
- * @author Sam
+ * @author Sam Hita (samhita7)
  * @version 11/15/19
  *
  */
@@ -78,7 +78,8 @@ public class SongTest extends student.TestCase {
     public void testToString() {
 
         assertEquals(song1.toString(),
-            "Song Title: Reborn\nSong Artist: Kid Cudi\nSong Genre: Rap\nSong Year: 2018");
+            "song title: Reborn\nsong artist: Kid Cudi\n"
+                + "song genre: Rap\nsong year: 2018");
 
     }
 

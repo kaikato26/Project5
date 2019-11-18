@@ -501,6 +501,9 @@ public class LinkedListTest extends TestCase {
     }
 
 
+    /**
+     * tests the sort method
+     */
     public void testSort() {
 
         assertEquals(0, list.size());

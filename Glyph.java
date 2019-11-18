@@ -6,8 +6,12 @@ package prj5;
 import java.util.HashMap;
 
 /**
- * @author anamk
- *
+ * @author Alex Namkung (anamkung)
+ * @version 11/15/19
+ * @author Kai Kato (kaikato26)
+ * @version 11/15/19
+ * @author Sam Hita (samhita7)
+ * @version 11/15/19
  */
 public class Glyph {
 
@@ -17,6 +21,13 @@ public class Glyph {
     private HashMap<Region, int[]> regionMap;
 
 
+    /**
+     * constructor for the glyph class
+     * creates hashmaps for hobby major and region
+     * 
+     * @param song
+     *            for the glyph
+     */
     public Glyph(Song song) {
 
         this.song = song;
@@ -39,12 +50,20 @@ public class Glyph {
     }
 
 
+    /**
+     * adds the result of the person on to a value in the hash map
+     * 
+     * @param person
+     *            whos results are to be added
+     * @param songNum
+     *            the number of response
+     */
     public void addResult(Person person, int songNum) {
-        
-        if(songNum >= person.getResults().length) {
+
+        if (songNum >= person.getResults().length) {
             return;
         }
-        
+
         String response = person.getResults()[songNum];
 
         if (songNum % 2 == 1) {
@@ -117,12 +136,22 @@ public class Glyph {
     }
 
 
+    /**
+     * gets the song
+     * 
+     * @return song
+     */
     public Song getSong() {
 
         return this.song;
     }
 
 
+    /**
+     * gets the hobbyMap
+     * 
+     * @return hobbyMap
+     */
     public HashMap<Hobby, int[]> getHobbyMap() {
 
         return this.hobbyMap;
@@ -130,6 +159,11 @@ public class Glyph {
     }
 
 
+    /**
+     * gets the majorMap
+     * 
+     * @return majorMap
+     */
     public HashMap<Major, int[]> getMajorMap() {
 
         return this.majorMap;
@@ -137,6 +171,11 @@ public class Glyph {
     }
 
 
+    /**
+     * gets the regionMap
+     * 
+     * @return regionMap
+     */
     public HashMap<Region, int[]> getRegionMap() {
 
         return this.regionMap;
@@ -144,6 +183,15 @@ public class Glyph {
     }
 
 
+    /**
+     * checks for divide by zero
+     * 
+     * @param num
+     *            numerator
+     * @param den
+     *            denominator
+     * @return double of the ratio
+     */
     private Double checkRatio(int num, int den) {
 
         if (den == 0) {
@@ -295,6 +343,12 @@ public class Glyph {
     }
 
 
+    /**
+     * 
+     * returns the glyph as a string
+     * 
+     * @return String rep of the glyph
+     */
     public String toString() {
 
         StringBuilder ret = new StringBuilder();
@@ -303,14 +357,14 @@ public class Glyph {
         ret.append(this.song.toString());
 
         ret.append("\nheard\n");
-        ret.append("reading:" + (int)(byHobby[0] * 100) + " art:" + (int)(byHobby[1]
-            * 100) + " sports:" + (int)(byHobby[2] * 100) + " music:" + (int)(byHobby[3]
-                * 100) + "\n");
+        ret.append("reading:" + (int)(byHobby[0] * 100) + " art:"
+            + (int)(byHobby[1] * 100) + " sports:" + (int)(byHobby[2] * 100)
+            + " music:" + (int)(byHobby[3] * 100) + "\n");
 
         ret.append("likes\n");
-        ret.append("reading:" + (int)(byHobby[4] * 100) + " art:" + (int)(byHobby[5]
-            * 100) + " sports:" + (int)(byHobby[6] * 100) + " music:" + (int)(byHobby[7]
-                * 100) + "\n");
+        ret.append("reading:" + (int)(byHobby[4] * 100) + " art:"
+            + (int)(byHobby[5] * 100) + " sports:" + (int)(byHobby[6] * 100)
+            + " music:" + (int)(byHobby[7] * 100) + "\n");
 /*
  * ret.append(Hobby.ART.toString() + " | Yes: " + this.hobbyMap.get(
  * Hobby.ART)[1] + " | No: " + this.hobbyMap.get(Hobby.ART)[0] + "\n");

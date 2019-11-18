@@ -4,11 +4,19 @@
 package prj5;
 
 /**
- * @author anamk
+ * @author Alex Namkung (anamkung)
+ * @version 11/15/19
+ * @author Kai Kato (kaikato26)
+ * @version 11/15/19
+ * @author Sam Hita (samhita7)
+ * @version 11/15/19
  *
  */
 public enum Hobby {
 
+    /**
+     * different hobbies
+     */
     READ, ART, SPORTS, MUSIC;
 
 }

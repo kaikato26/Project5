@@ -8,7 +8,7 @@ package prj5;
  * @version 11/15/19
  * @author Kai Kato (kaikato26)
  * @version 11/15/19
- * @author Sam
+ * @author Sam Hita (samhita7)
  * @version 11/15/19
  *
  */

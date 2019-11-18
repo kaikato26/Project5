@@ -11,8 +11,12 @@ import java.util.Scanner;
 import bsh.ParseException;
 
 /**
- * @author anamk
- *
+ * @author Alex Namkung (anamkung)
+ * @version 11/15/19
+ * @author Kai Kato (kaikato26)
+ * @version 11/15/19
+ * @author Sam Hita (samhita7)
+ * @version 11/15/19
  */
 public class MusicReader {
 
@@ -21,16 +25,35 @@ public class MusicReader {
     private MusicCalculator glyphList;
 
 
+    /**
+     * constructor for the MusicReader
+     * 
+     * @param songFileName
+     *            song file
+     * @param personFileName
+     *            person file
+     * @throws FileNotFoundException
+     *             exception
+     */
     public MusicReader(String songFileName, String personFileName)
         throws FileNotFoundException {
 
         this.songList = this.readSongs(songFileName);
         this.personList = this.readPersons(personFileName);
         this.glyphList = new MusicCalculator(songList, personList);
-        
+
     }
 
 
+    /**
+     * reads the song file and fills up an ArrayList songs
+     * 
+     * @param songFileName
+     *            file to be read
+     * @return an array list of songs
+     * @throws FileNotFoundException
+     *             exception
+     */
     public ArrayList<Song> readSongs(String songFileName)
         throws FileNotFoundException {
 
@@ -55,6 +78,16 @@ public class MusicReader {
     }
 
 
+    /**
+     * reads the file filled with the person and their responses
+     * fills an arraylist of persons with the file data
+     * 
+     * @param personFileName
+     *            file to be read
+     * @return arraylist of persons
+     * @throws FileNotFoundException
+     *             exception
+     */
     public ArrayList<Person> readPersons(String personFileName)
         throws FileNotFoundException {
 
@@ -84,6 +117,12 @@ public class MusicReader {
     }
 
 
+    /**
+     * private method that checks for empty values in a array
+     * 
+     * @param vals
+     * @return
+     */
     private boolean checkForEmptyVals(String[] vals) {
 
         for (int i = 0; i < vals.length; i++) {
@@ -95,9 +134,15 @@ public class MusicReader {
         return false;
 
     }
-    
+
+
+    /**
+     * getter method for the music calculator
+     * 
+     * @return MusicCalculator
+     */
     public MusicCalculator getMusicCalc() {
-        
+
         return this.glyphList;
     }
 

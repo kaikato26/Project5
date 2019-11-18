@@ -4,8 +4,12 @@
 package prj5;
 
 /**
- * @author anamk
- *
+ * @author Alex Namkung (anamkung)
+ * @version 11/15/19
+ * @author Kai Kato (kaikato26)
+ * @version 11/15/19
+ * @author Sam Hita (samhita7)
+ * @version 11/15/19
  */
 public class PersonTest extends student.TestCase {
 
@@ -20,6 +24,9 @@ public class PersonTest extends student.TestCase {
     private Person test9;
 
 
+    /**
+     * sets up the person to be tested
+     */
     public void setUp() {
 
         test5 = new Person("art", "computer science", "southeast", test1);
@@ -33,6 +40,9 @@ public class PersonTest extends student.TestCase {
     }
 
 
+    /**
+     * tests the get hobby method
+     */
     public void testGetHobby() {
 
         assertEquals(test5.getHobby(), Hobby.ART);
@@ -43,6 +53,9 @@ public class PersonTest extends student.TestCase {
     }
 
 
+    /**
+     * tests the get major method
+     */
     public void testGetMajor() {
 
         assertEquals(test5.getMajor(), Major.COMPUTER_SCIENCE);
@@ -53,6 +66,9 @@ public class PersonTest extends student.TestCase {
     }
 
 
+    /**
+     * tests the get region method
+     */
     public void testGetRegion() {
 
         assertEquals(test5.getRegion(), Region.SOUTHEAST_US);
@@ -63,6 +79,9 @@ public class PersonTest extends student.TestCase {
     }
 
 
+    /**
+     * test the get results method
+     */
     public void testResults() {
 
         assertEquals(test5.getResults(), test1);
@@ -73,6 +92,10 @@ public class PersonTest extends student.TestCase {
     }
 
 
+    /**
+     * test the equals for the person class
+     * tests type null and more
+     */
     public void testEquals() {
         Person test20 = new Person("art", "computer science", "southeast",
             test1);
