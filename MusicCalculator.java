@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project5;
+package prj5;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,15 +28,19 @@ public class MusicCalculator {
         ArrayList<Person> persons) {
 
         LinkedList<Glyph> glyphList = new LinkedList<Glyph>();
+        
+        int len = songs.size();
+        
 
-        for (int i = 0; i < songs.size(); i++) {
+        for (int i = 0; i <len; i++) {
 
             glyphList.add(new Glyph(songs.get(i)));
 
             for (int j = 0; j < persons.size(); j++) {
 
-                glyphList.get(i).addResult(persons.get(j), i);
-
+                glyphList.get(i).addResult(persons.get(j), 2 * i);
+                glyphList.get(i).addResult(persons.get(j), 2 * i + 1);
+                
             }
 
         }
@@ -45,10 +49,9 @@ public class MusicCalculator {
 
 
     public LinkedList<Glyph> sortGlyphs(String sortCriteria) {
-        
+
         LinkedList<Glyph> copyGlyph = new LinkedList<Glyph>();
         LinkedList<String> sortList = new LinkedList<String>();
-        
 
         if (sortCriteria.equals("date")) {
             LinkedList<Integer> songDates = new LinkedList<Integer>();
@@ -69,8 +72,8 @@ public class MusicCalculator {
                 }
             }
             this.setGlyphList(copyGlyph);
-            return glyphList;
-            
+            return this.glyphList;
+
         }
 
         switch (sortCriteria) {
@@ -93,7 +96,7 @@ public class MusicCalculator {
                     }
                 }
                 this.setGlyphList(copyGlyph);
-                return glyphList;
+                return this.glyphList;
 
             case "genre":
                 for (int i = 0; i < songList.size(); i++) {
@@ -114,7 +117,7 @@ public class MusicCalculator {
                     }
                 }
                 this.setGlyphList(copyGlyph);
-                return glyphList;
+                return this.glyphList;
 
             case "artist":
                 for (int i = 0; i < songList.size(); i++) {
@@ -135,22 +138,24 @@ public class MusicCalculator {
                     }
                 }
                 this.setGlyphList(copyGlyph);
-                return glyphList;
+                return this.glyphList;
 
             default:
                 return null;
         }
 
     }
-    
-    public LinkedList<Glyph> getGlyphList(){
-        
+
+
+    public LinkedList<Glyph> getGlyphList() {
+
         return this.glyphList;
-        
+
     }
-    
+
+
     public void setGlyphList(LinkedList<Glyph> glyphList) {
-        
+
         this.glyphList = glyphList;
     }
 

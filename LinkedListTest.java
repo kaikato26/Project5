@@ -1,10 +1,9 @@
 /**
  *
  */
-package project5;
+package prj5;
 
 import java.util.Iterator;
-
 import student.TestCase;
 
 /**
@@ -500,9 +499,10 @@ public class LinkedListTest extends TestCase {
         rIter.next();
 
     }
-    
+
+
     public void testSort() {
-        
+
         assertEquals(0, list.size());
         list.add("z");
         assertEquals(1, list.size());
@@ -512,10 +512,10 @@ public class LinkedListTest extends TestCase {
         list.add("a");
         list.add("j");
         list.add("k");
-        
+
         list = list.sort();
         assertEquals(list.toString(), "a\n\n\nb\n\n\nj\n\n\nk\n\n\nz");
-        
+
         LinkedList<Integer> temp = new LinkedList<Integer>();
         temp.add(5);
         temp.add(5);
@@ -524,7 +524,7 @@ public class LinkedListTest extends TestCase {
         temp.add(1);
         temp = temp.sort();
         assertEquals(temp.toString(), "1\n\n\n3\n\n\n5\n\n\n5\n\n\n7");
-        
+
     }
 
 }

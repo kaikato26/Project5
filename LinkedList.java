@@ -1,8 +1,7 @@
-package project5;
+package prj5;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 
 /**
  * This provides implementation for some of the LList methods.
@@ -11,7 +10,7 @@ import java.util.NoSuchElementException;
  * @version 11/15/19
  * @author Kai Kato (kaikato26)
  * @version 11/15/19
- * @author maellis1
+ * @author Sam
  * @version 11/15/19
  * @param <E>
  *            The type of object the class will store
@@ -124,31 +123,31 @@ public class LinkedList<E> {
 
 
     public LinkedList<E> sort() {
-        
+
         LinkedList<E> tempSort = new LinkedList<E>();
-        if(this.size <= 1) {
+        if (this.size <= 1) {
             return this;
         }
         tempSort.add(this.get(0));
-        for(int i = 1; i < this.size; i++) {
-            
+        for (int i = 1; i < this.size; i++) {
+
             E curr = this.get(i);
             boolean addCheck = false;
-            for(int j = 0; j < tempSort.size; j++) {
-                
+            for (int j = 0; j < tempSort.size; j++) {
+
                 E innerCurr = tempSort.get(j);
-                if((curr.toString()).compareTo(innerCurr.toString()) < 0) {
+                if ((curr.toString()).compareTo(innerCurr.toString()) < 0) {
                     tempSort.add(j, curr);
                     addCheck = true;
                     break;
                 }
-                
+
             }
-            
-            if(!addCheck) {
+
+            if (!addCheck) {
                 tempSort.add(curr);
             }
-            
+
         }
         return tempSort;
     }
@@ -368,13 +367,12 @@ public class LinkedList<E> {
                 E element = currNode.getData();
                 builder.append(element.toString());
                 if (currNode.next != tail) {
-                    builder.append("\n\n\n");
+                    builder.append("\n");
                 }
                 currNode = currNode.next();
             }
         }
 
-        
         return builder.toString();
     }
 

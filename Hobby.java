@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project5;
+package prj5;
 
 /**
  * @author anamk
@@ -10,5 +10,5 @@ package project5;
 public enum Hobby {
 
     READ, ART, SPORTS, MUSIC;
-    
+
 }

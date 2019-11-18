@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project5;
+package prj5;
 
 import java.util.ArrayList;
 
@@ -10,11 +10,11 @@ import java.util.ArrayList;
  *
  */
 public class MusicCalculatorTest extends student.TestCase {
-    
+
     private MusicCalculator test;
     private ArrayList<Person> persons;
     private ArrayList<Song> songs;
-   
+
     private Person test5;
     private Person test6;
     private Person test7;
@@ -23,17 +23,18 @@ public class MusicCalculatorTest extends student.TestCase {
     private Song song2;
     private Song song3;
     private Song song4;
-    
+
+
     public void setUp() {
-        
+
         persons = new ArrayList<Person>();
         songs = new ArrayList<Song>();
         String[] test1 = { "Yes", "No", "", "No" };
         String[] test2 = { "No", "No", "Yes", "" };
         String[] test3 = { "", "No", "Yes", "Yes" };
         String[] test4 = { "Yes", "", "No", "No" };
-        test5 = new Person("art", "computer science", "southeast us", test1);
-        test6 = new Person("read", "math or cmda", "northeast us", test2);
+        test5 = new Person("art", "computer science", "southeast", test1);
+        test6 = new Person("reading", "math or cmda", "northeast", test2);
         test7 = new Person("music", "other",
             "united states (other than southeast or northwest)", test3);
         test8 = new Person("sports", "other engineering", "outside the us",
@@ -42,7 +43,7 @@ public class MusicCalculatorTest extends student.TestCase {
         song2 = new Song("J.Cole", "Middle Child", "HipHop", 2019);
         song3 = new Song("Juice WRLD", "All Girls Are The Same", "R&B", 2017);
         song4 = new Song("Kanye West", "Heartless", "R&B", 2009);
-        
+
         persons.add(test5);
         persons.add(test6);
         persons.add(test7);
@@ -51,17 +52,44 @@ public class MusicCalculatorTest extends student.TestCase {
         songs.add(song2);
         songs.add(song3);
         songs.add(song4);
-        
-        
+
     }
-    
+
+
     public void testSort() {
         test = new MusicCalculator(songs, persons);
-        
-        System.out.println(test.sortGlyphs("title").toString());
-        
+
+        test.sortGlyphs("date");
+        assertEquals(test.getGlyphList().get(0).getSong().getDate(), 2009);
+        assertEquals(test.getGlyphList().get(1).getSong().getDate(), 2017);
+        assertEquals(test.getGlyphList().get(2).getSong().getDate(), 2018);
+        assertEquals(test.getGlyphList().get(3).getSong().getDate(), 2019);
+
+        test.sortGlyphs("genre");
+        assertEquals(test.getGlyphList().get(0).getSong().getGenre(), "HipHop");
+        assertEquals(test.getGlyphList().get(1).getSong().getGenre(), "R&B");
+        assertEquals(test.getGlyphList().get(2).getSong().getGenre(), "R&B");
+        assertEquals(test.getGlyphList().get(3).getSong().getGenre(), "Rap");
+
+        test.sortGlyphs("title");
+        assertEquals(test.getGlyphList().get(0).getSong().getTitle(),
+            "All Girls Are The Same");
+        assertEquals(test.getGlyphList().get(1).getSong().getTitle(),
+            "Heartless");
+        assertEquals(test.getGlyphList().get(2).getSong().getTitle(),
+            "Middle Child");
+        assertEquals(test.getGlyphList().get(3).getSong().getTitle(), "Reborn");
+
+        test.sortGlyphs("artist");
+        assertEquals(test.getGlyphList().get(0).getSong().getArtist(),
+            "J.Cole");
+        assertEquals(test.getGlyphList().get(1).getSong().getArtist(),
+            "Juice WRLD");
+        assertEquals(test.getGlyphList().get(2).getSong().getArtist(),
+            "Kanye West");
+        assertEquals(test.getGlyphList().get(3).getSong().getArtist(),
+            "Kid Cudi");
+
     }
-    
-    
 
 }

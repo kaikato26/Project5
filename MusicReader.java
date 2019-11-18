@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project5;
+package prj5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,21 +18,21 @@ public class MusicReader {
 
     private ArrayList<Song> songList;
     private ArrayList<Person> personList;
+    private MusicCalculator glyphList;
 
 
     public MusicReader(String songFileName, String personFileName)
-        throws FileNotFoundException,
-        ParseException {
+        throws FileNotFoundException {
 
         this.songList = this.readSongs(songFileName);
         this.personList = this.readPersons(personFileName);
-
+        this.glyphList = new MusicCalculator(songList, personList);
+        
     }
 
 
     public ArrayList<Song> readSongs(String songFileName)
-        throws FileNotFoundException,
-        ParseException {
+        throws FileNotFoundException {
 
         ArrayList<Song> songs = new ArrayList<Song>();
         Scanner scan = new Scanner(new File(songFileName));
@@ -42,10 +42,10 @@ public class MusicReader {
             String line = scan.nextLine();
             String[] vals = line.split(", *", -1);
             if (vals.length != 4) {
-                throw new ParseException();
+                continue;
             }
 
-            songs.add(new Song(vals[0], vals[1], vals[3], Integer.valueOf(
+            songs.add(new Song(vals[1], vals[0], vals[3], Integer.valueOf(
                 vals[2])));
 
         }
@@ -56,8 +56,7 @@ public class MusicReader {
 
 
     public ArrayList<Person> readPersons(String personFileName)
-        throws FileNotFoundException,
-        ParseException {
+        throws FileNotFoundException {
 
         ArrayList<Person> persons = new ArrayList<Person>();
         Scanner scan = new Scanner(new File(personFileName));
@@ -68,7 +67,7 @@ public class MusicReader {
             String line = scan.nextLine();
             String[] vals = line.split(", *", -1);
             if (vals.length != len) {
-                throw new ParseException();
+                continue;
             }
             String[] attributes = Arrays.copyOfRange(vals, 2, 5);
             String[] responses = Arrays.copyOfRange(vals, 5, len);
@@ -95,6 +94,11 @@ public class MusicReader {
         }
         return false;
 
+    }
+    
+    public MusicCalculator getMusicCalc() {
+        
+        return this.glyphList;
     }
 
 }

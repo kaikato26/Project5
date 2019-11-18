@@ -1,7 +1,7 @@
 /**
  * 
  */
-package project5;
+package prj5;
 
 /**
  * @author anamk
@@ -53,9 +53,9 @@ public class Person {
     }
 
 
-    private Hobby stringToHobby(String hobby) {
+    private Hobby stringToHobby(String hobbyOfPerson) {
 
-        switch (hobby) {
+        switch (hobbyOfPerson) {
             case "art":
                 return Hobby.ART;
             case "sports":
@@ -71,9 +71,9 @@ public class Person {
     }
 
 
-    private Major stringToMajor(String major) {
+    private Major stringToMajor(String majorOfPerson) {
 
-        switch (major) {
+        switch (majorOfPerson) {
             case "computer science":
                 return Major.COMPUTER_SCIENCE;
             case "math or cmda":
@@ -89,14 +89,14 @@ public class Person {
     }
 
 
-    private Region stringToRegion(String region) {
+    private Region stringToRegion(String regionOfPerson) {
 
-        switch (region) {
+        switch (regionOfPerson) {
             case "southeast":
                 return Region.SOUTHEAST_US;
             case "northeast":
                 return Region.NORTHEAST_US;
-            case "outside the us":
+            case "outside of united states":
                 return Region.OUTSIDE_THE_US;
             case "united states (other than southeast or northwest)":
                 return Region.THE_REST_OF_US;
@@ -113,18 +113,18 @@ public class Person {
             return false;
         }
 
-         if (obj == this) {
+        if (obj == this) {
             return true;
         }
 
         if (this.getClass() == (obj.getClass())) {
 
             Person person = (Person)obj;
-            
-            return (this.getHobby() == (person.getHobby()))
-                && (this.getMajor() == (person.getMajor()))
-                && (this.getRegion() == (person.getRegion()))
-                && (this.getResults().equals(person.getResults()));
+
+            return (this.getHobby() == (person.getHobby())) && (this
+                .getMajor() == (person.getMajor())) && (this
+                    .getRegion() == (person.getRegion())) && (this.getResults()
+                        .equals(person.getResults()));
         }
 
         return false;
