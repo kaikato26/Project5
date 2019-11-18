@@ -17,6 +17,7 @@ public class PersonTest extends student.TestCase {
     private Person test6;
     private Person test7;
     private Person test8;
+    private Person test9;
 
 
     public void setUp() {
@@ -25,8 +26,9 @@ public class PersonTest extends student.TestCase {
         test6 = new Person("reading", "math or cmda", "northeast", test2);
         test7 = new Person("music", "other",
             "united states (other than southeast or northwest)", test3);
-        test8 = new Person("sports", "other engineering", "outside of united states",
-            test4);
+        test8 = new Person("sports", "other engineering",
+            "outside of united states", test4);
+        test9 = new Person("", "", "", test1);
 
     }
 
@@ -74,12 +76,34 @@ public class PersonTest extends student.TestCase {
     public void testEquals() {
         Person test20 = new Person("art", "computer science", "southeast",
             test1);
+        Person diffHobby = new Person("", "computer science", "southeast",
+            test1);
+
+        Person diffMajor = new Person("art", "", "southeast", test1);
+        Person diffRegion = new Person("art", "computer science", "", test1);
+        Person diffResponse = new Person("art", "computer science", "southeast",
+            test2);
+
+        assertFalse(test5.equals(diffHobby));
+        assertFalse(test5.equals(diffMajor));
+        assertFalse(test5.equals(diffRegion));
+        assertFalse(test5.equals(diffResponse));
+
         Person nullType = null;
         String stringType = "hello";
         assertFalse(test5.equals(nullType));
         assertTrue(test5.equals(test5));
         assertFalse(test5.equals(stringType));
         assertTrue(test5.equals(test20));
+        assertFalse(test5.equals(test6));
+
+        Object obj = null;
+        assertFalse(test5.equals(obj));
+
+        obj = new Object();
+        assertFalse(test5.equals(obj));
+
+        assertFalse(test5.equals(test9));
         assertFalse(test5.equals(test6));
 
     }

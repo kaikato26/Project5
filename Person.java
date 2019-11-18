@@ -4,8 +4,8 @@
 package prj5;
 
 /**
- * @author anamk
- *
+ * @author anamk kaikato26 samhita7
+ * @version 11/17/2019
  */
 public class Person {
 
@@ -15,6 +15,18 @@ public class Person {
     private String[] results;
 
 
+    /**
+     * Person class
+     * 
+     * @param hobby
+     *            Person's hobby
+     * @param major
+     *            person's major
+     * @param region
+     *            Person's region
+     * @param results
+     *            Person's survey results
+     */
     public Person(String hobby, String major, String region, String[] results) {
 
         this.results = results;
@@ -25,6 +37,11 @@ public class Person {
     }
 
 
+    /**
+     * Returns the hobby
+     * 
+     * @return Hobby
+     */
     public Hobby getHobby() {
 
         return this.hobby;
@@ -32,6 +49,11 @@ public class Person {
     }
 
 
+    /**
+     * Returns the major
+     * 
+     * @return Major
+     */
     public Major getMajor() {
 
         return this.major;
@@ -39,6 +61,11 @@ public class Person {
     }
 
 
+    /**
+     * Returns the region
+     * 
+     * @return Region
+     */
     public Region getRegion() {
 
         return this.region;
@@ -46,6 +73,11 @@ public class Person {
     }
 
 
+    /**
+     * Returns the results
+     * 
+     * @return String[]
+     */
     public String[] getResults() {
 
         return this.results;
@@ -53,6 +85,12 @@ public class Person {
     }
 
 
+    /**
+     * Converts the string to a hobby
+     * 
+     * @param hobbyOfPerson
+     * @return Hobby
+     */
     private Hobby stringToHobby(String hobbyOfPerson) {
 
         switch (hobbyOfPerson) {
@@ -71,6 +109,12 @@ public class Person {
     }
 
 
+    /**
+     * Converts the string to a major
+     * 
+     * @param majorOfPerson
+     * @return Major
+     */
     private Major stringToMajor(String majorOfPerson) {
 
         switch (majorOfPerson) {
@@ -89,6 +133,12 @@ public class Person {
     }
 
 
+    /**
+     * Converts the string a region
+     * 
+     * @param regionOfPerson
+     * @return Region
+     */
     private Region stringToRegion(String regionOfPerson) {
 
         switch (regionOfPerson) {
@@ -107,6 +157,13 @@ public class Person {
     }
 
 
+    /**
+     * Checks if two persons are equal
+     * 
+     * @return boolean
+     * @param obj
+     *            Testing object
+     */
     public boolean equals(Object obj) {
 
         if (obj == null) {

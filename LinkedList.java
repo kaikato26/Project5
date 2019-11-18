@@ -122,6 +122,11 @@ public class LinkedList<E> {
     }
 
 
+    /**
+     * Sorts the linkedList
+     * 
+     * @return LinkedList<E>
+     */
     public LinkedList<E> sort() {
 
         LinkedList<E> tempSort = new LinkedList<E>();
