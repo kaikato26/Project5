@@ -8,14 +8,13 @@ package prj5;
  * @version 11/15/19
  * @author Kai Kato (kaikato26)
  * @version 11/15/19
- * @author Sam Hita (samhita7)
- * @version 11/15/19
- */
+ * @author Sam Hita ([';p/.samhita7)
+ * @version 11/15/19? */
 public class Person {
 
-    private Hobby hobby;
-    private Major major;
-    private Region region;
+    private HobbyEnum hobby;
+    private MajorEnum major;
+    private RegionEnum region;
     private String[] results;
 
 
@@ -46,7 +45,7 @@ public class Person {
      * 
      * @return Hobby
      */
-    public Hobby getHobby() {
+    public HobbyEnum getHobby() {
 
         return this.hobby;
 
@@ -58,7 +57,7 @@ public class Person {
      * 
      * @return Major
      */
-    public Major getMajor() {
+    public MajorEnum getMajor() {
 
         return this.major;
 
@@ -70,7 +69,7 @@ public class Person {
      * 
      * @return Region
      */
-    public Region getRegion() {
+    public RegionEnum getRegion() {
 
         return this.region;
 
@@ -95,17 +94,17 @@ public class Person {
      * @param hobbyOfPerson
      * @return Hobby
      */
-    private Hobby stringToHobby(String hobbyOfPerson) {
+    private HobbyEnum stringToHobby(String hobbyOfPerson) {
 
         switch (hobbyOfPerson) {
             case "art":
-                return Hobby.ART;
+                return HobbyEnum.ART;
             case "sports":
-                return Hobby.SPORTS;
+                return HobbyEnum.SPORTS;
             case "music":
-                return Hobby.MUSIC;
+                return HobbyEnum.MUSIC;
             case "reading":
-                return Hobby.READ;
+                return HobbyEnum.READ;
             default:
                 return null;
         }
@@ -119,17 +118,17 @@ public class Person {
      * @param majorOfPerson
      * @return Major
      */
-    private Major stringToMajor(String majorOfPerson) {
+    private MajorEnum stringToMajor(String majorOfPerson) {
 
         switch (majorOfPerson) {
             case "computer science":
-                return Major.COMPUTER_SCIENCE;
+                return MajorEnum.COMPUTER_SCIENCE;
             case "math or cmda":
-                return Major.MATH_OR_CMDA;
+                return MajorEnum.MATH_OR_CMDA;
             case "other":
-                return Major.OTHER;
+                return MajorEnum.OTHER;
             case "other engineering":
-                return Major.OTHER_ENGINEERING;
+                return MajorEnum.OTHER_ENGINEERING;
             default:
                 return null;
         }
@@ -143,17 +142,17 @@ public class Person {
      * @param regionOfPerson
      * @return Region
      */
-    private Region stringToRegion(String regionOfPerson) {
+    private RegionEnum stringToRegion(String regionOfPerson) {
 
         switch (regionOfPerson) {
             case "southeast":
-                return Region.SOUTHEAST_US;
+                return RegionEnum.SOUTHEAST_US;
             case "northeast":
-                return Region.NORTHEAST_US;
+                return RegionEnum.NORTHEAST_US;
             case "outside of united states":
-                return Region.OUTSIDE_THE_US;
+                return RegionEnum.OUTSIDE_THE_US;
             case "united states (other than southeast or northwest)":
-                return Region.THE_REST_OF_US;
+                return RegionEnum.THE_REST_OF_US;
             default:
                 return null;
         }

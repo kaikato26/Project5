@@ -16,9 +16,9 @@ import java.util.HashMap;
 public class Glyph {
 
     private Song song;
-    private HashMap<Hobby, int[]> hobbyMap;
-    private HashMap<Major, int[]> majorMap;
-    private HashMap<Region, int[]> regionMap;
+    private HashMap<HobbyEnum, int[]> hobbyMap;
+    private HashMap<MajorEnum, int[]> majorMap;
+    private HashMap<RegionEnum, int[]> regionMap;
 
 
     /**
@@ -31,21 +31,21 @@ public class Glyph {
     public Glyph(Song song) {
 
         this.song = song;
-        hobbyMap = new HashMap<Hobby, int[]>();
-        majorMap = new HashMap<Major, int[]>();
-        regionMap = new HashMap<Region, int[]>();
-        hobbyMap.put(Hobby.ART, new int[4]);
-        hobbyMap.put(Hobby.READ, new int[4]);
-        hobbyMap.put(Hobby.SPORTS, new int[4]);
-        hobbyMap.put(Hobby.MUSIC, new int[4]);
-        majorMap.put(Major.COMPUTER_SCIENCE, new int[4]);
-        majorMap.put(Major.MATH_OR_CMDA, new int[4]);
-        majorMap.put(Major.OTHER, new int[4]);
-        majorMap.put(Major.OTHER_ENGINEERING, new int[4]);
-        regionMap.put(Region.NORTHEAST_US, new int[4]);
-        regionMap.put(Region.SOUTHEAST_US, new int[4]);
-        regionMap.put(Region.OUTSIDE_THE_US, new int[4]);
-        regionMap.put(Region.THE_REST_OF_US, new int[4]);
+        hobbyMap = new HashMap<HobbyEnum, int[]>();
+        majorMap = new HashMap<MajorEnum, int[]>();
+        regionMap = new HashMap<RegionEnum, int[]>();
+        hobbyMap.put(HobbyEnum.ART, new int[4]);
+        hobbyMap.put(HobbyEnum.READ, new int[4]);
+        hobbyMap.put(HobbyEnum.SPORTS, new int[4]);
+        hobbyMap.put(HobbyEnum.MUSIC, new int[4]);
+        majorMap.put(MajorEnum.COMPUTER_SCIENCE, new int[4]);
+        majorMap.put(MajorEnum.MATH_OR_CMDA, new int[4]);
+        majorMap.put(MajorEnum.OTHER, new int[4]);
+        majorMap.put(MajorEnum.OTHER_ENGINEERING, new int[4]);
+        regionMap.put(RegionEnum.NORTHEAST_US, new int[4]);
+        regionMap.put(RegionEnum.SOUTHEAST_US, new int[4]);
+        regionMap.put(RegionEnum.OUTSIDE_THE_US, new int[4]);
+        regionMap.put(RegionEnum.THE_REST_OF_US, new int[4]);
 
     }
 
@@ -152,7 +152,7 @@ public class Glyph {
      * 
      * @return hobbyMap
      */
-    public HashMap<Hobby, int[]> getHobbyMap() {
+    public HashMap<HobbyEnum, int[]> getHobbyMap() {
 
         return this.hobbyMap;
 
@@ -164,7 +164,7 @@ public class Glyph {
      * 
      * @return majorMap
      */
-    public HashMap<Major, int[]> getMajorMap() {
+    public HashMap<MajorEnum, int[]> getMajorMap() {
 
         return this.majorMap;
 
@@ -176,7 +176,7 @@ public class Glyph {
      * 
      * @return regionMap
      */
-    public HashMap<Region, int[]> getRegionMap() {
+    public HashMap<RegionEnum, int[]> getRegionMap() {
 
         return this.regionMap;
 
@@ -216,29 +216,33 @@ public class Glyph {
     public Double[] getRatioByHobby() {
 
         Double[] ret = new Double[8];
-        ret[0] = checkRatio(this.hobbyMap.get(Hobby.READ)[3], (this.hobbyMap
-            .get(Hobby.READ)[3] + this.hobbyMap.get(Hobby.READ)[2]));
+        ret[0] = checkRatio(this.hobbyMap.get(HobbyEnum.READ)[3], (this.hobbyMap
+            .get(HobbyEnum.READ)[3] + this.hobbyMap.get(HobbyEnum.READ)[2]));
 
-        ret[1] = checkRatio(this.hobbyMap.get(Hobby.ART)[3], (this.hobbyMap.get(
-            Hobby.ART)[3] + this.hobbyMap.get(Hobby.ART)[2]));
+        ret[1] = checkRatio(this.hobbyMap.get(HobbyEnum.ART)[3], (this.hobbyMap
+            .get(HobbyEnum.ART)[3] + this.hobbyMap.get(HobbyEnum.ART)[2]));
 
-        ret[2] = checkRatio(this.hobbyMap.get(Hobby.SPORTS)[3], (this.hobbyMap
-            .get(Hobby.SPORTS)[3] + this.hobbyMap.get(Hobby.SPORTS)[2]));
+        ret[2] = checkRatio(this.hobbyMap.get(HobbyEnum.SPORTS)[3],
+            (this.hobbyMap.get(HobbyEnum.SPORTS)[3] + this.hobbyMap.get(
+                HobbyEnum.SPORTS)[2]));
 
-        ret[3] = checkRatio(this.hobbyMap.get(Hobby.MUSIC)[3], (this.hobbyMap
-            .get(Hobby.MUSIC)[3] + this.hobbyMap.get(Hobby.MUSIC)[2]));
+        ret[3] = checkRatio(this.hobbyMap.get(HobbyEnum.MUSIC)[3],
+            (this.hobbyMap.get(HobbyEnum.MUSIC)[3] + this.hobbyMap.get(
+                HobbyEnum.MUSIC)[2]));
 
-        ret[4] = checkRatio(this.hobbyMap.get(Hobby.READ)[1], (this.hobbyMap
-            .get(Hobby.READ)[1] + this.hobbyMap.get(Hobby.READ)[0]));
+        ret[4] = checkRatio(this.hobbyMap.get(HobbyEnum.READ)[1], (this.hobbyMap
+            .get(HobbyEnum.READ)[1] + this.hobbyMap.get(HobbyEnum.READ)[0]));
 
-        ret[5] = checkRatio(this.hobbyMap.get(Hobby.ART)[1], (this.hobbyMap.get(
-            Hobby.ART)[1] + this.hobbyMap.get(Hobby.ART)[0]));
+        ret[5] = checkRatio(this.hobbyMap.get(HobbyEnum.ART)[1], (this.hobbyMap
+            .get(HobbyEnum.ART)[1] + this.hobbyMap.get(HobbyEnum.ART)[0]));
 
-        ret[6] = checkRatio(this.hobbyMap.get(Hobby.SPORTS)[1], (this.hobbyMap
-            .get(Hobby.SPORTS)[1] + this.hobbyMap.get(Hobby.SPORTS)[0]));
+        ret[6] = checkRatio(this.hobbyMap.get(HobbyEnum.SPORTS)[1],
+            (this.hobbyMap.get(HobbyEnum.SPORTS)[1] + this.hobbyMap.get(
+                HobbyEnum.SPORTS)[0]));
 
-        ret[7] = checkRatio(this.hobbyMap.get(Hobby.MUSIC)[1], (this.hobbyMap
-            .get(Hobby.MUSIC)[1] + this.hobbyMap.get(Hobby.MUSIC)[0]));
+        ret[7] = checkRatio(this.hobbyMap.get(HobbyEnum.MUSIC)[1],
+            (this.hobbyMap.get(HobbyEnum.MUSIC)[1] + this.hobbyMap.get(
+                HobbyEnum.MUSIC)[0]));
 
         return ret;
 
@@ -258,35 +262,37 @@ public class Glyph {
     public Double[] getRatioByMajor() {
 
         Double[] ret = new Double[8];
-        ret[0] = checkRatio(this.majorMap.get(Major.COMPUTER_SCIENCE)[3],
-            (this.majorMap.get(Major.COMPUTER_SCIENCE)[3] + this.majorMap.get(
-                Major.COMPUTER_SCIENCE)[2]));
+        ret[0] = checkRatio(this.majorMap.get(MajorEnum.COMPUTER_SCIENCE)[3],
+            (this.majorMap.get(MajorEnum.COMPUTER_SCIENCE)[3] + this.majorMap
+                .get(MajorEnum.COMPUTER_SCIENCE)[2]));
 
-        ret[1] = checkRatio(this.majorMap.get(Major.MATH_OR_CMDA)[3],
-            (this.majorMap.get(Major.MATH_OR_CMDA)[3] + this.majorMap.get(
-                Major.MATH_OR_CMDA)[2]));
+        ret[2] = checkRatio(this.majorMap.get(MajorEnum.MATH_OR_CMDA)[3],
+            (this.majorMap.get(MajorEnum.MATH_OR_CMDA)[3] + this.majorMap.get(
+                MajorEnum.MATH_OR_CMDA)[2]));
 
-        ret[2] = checkRatio(this.majorMap.get(Major.OTHER)[3], (this.majorMap
-            .get(Major.OTHER)[3] + this.majorMap.get(Major.OTHER)[2]));
+        ret[3] = checkRatio(this.majorMap.get(MajorEnum.OTHER)[3],
+            (this.majorMap.get(MajorEnum.OTHER)[3] + this.majorMap.get(
+                MajorEnum.OTHER)[2]));
 
-        ret[3] = checkRatio(this.majorMap.get(Major.OTHER_ENGINEERING)[3],
-            (this.majorMap.get(Major.OTHER_ENGINEERING)[3] + this.majorMap.get(
-                Major.OTHER_ENGINEERING)[2]));
+        ret[1] = checkRatio(this.majorMap.get(MajorEnum.OTHER_ENGINEERING)[3],
+            (this.majorMap.get(MajorEnum.OTHER_ENGINEERING)[3] + this.majorMap
+                .get(MajorEnum.OTHER_ENGINEERING)[2]));
 
-        ret[4] = checkRatio(this.majorMap.get(Major.COMPUTER_SCIENCE)[1],
-            (this.majorMap.get(Major.COMPUTER_SCIENCE)[1] + this.majorMap.get(
-                Major.COMPUTER_SCIENCE)[0]));
+        ret[4] = checkRatio(this.majorMap.get(MajorEnum.COMPUTER_SCIENCE)[1],
+            (this.majorMap.get(MajorEnum.COMPUTER_SCIENCE)[1] + this.majorMap
+                .get(MajorEnum.COMPUTER_SCIENCE)[0]));
 
-        ret[5] = checkRatio(this.majorMap.get(Major.MATH_OR_CMDA)[1],
-            (this.majorMap.get(Major.MATH_OR_CMDA)[1] + this.majorMap.get(
-                Major.MATH_OR_CMDA)[0]));
+        ret[6] = checkRatio(this.majorMap.get(MajorEnum.MATH_OR_CMDA)[1],
+            (this.majorMap.get(MajorEnum.MATH_OR_CMDA)[1] + this.majorMap.get(
+                MajorEnum.MATH_OR_CMDA)[0]));
 
-        ret[6] = checkRatio(this.majorMap.get(Major.OTHER)[1], (this.majorMap
-            .get(Major.OTHER)[1] + this.majorMap.get(Major.OTHER)[0]));
+        ret[7] = checkRatio(this.majorMap.get(MajorEnum.OTHER)[1],
+            (this.majorMap.get(MajorEnum.OTHER)[1] + this.majorMap.get(
+                MajorEnum.OTHER)[0]));
 
-        ret[7] = checkRatio(this.majorMap.get(Major.OTHER_ENGINEERING)[1],
-            (this.majorMap.get(Major.OTHER_ENGINEERING)[1] + this.majorMap.get(
-                Major.OTHER_ENGINEERING)[0]));
+        ret[5] = checkRatio(this.majorMap.get(MajorEnum.OTHER_ENGINEERING)[1],
+            (this.majorMap.get(MajorEnum.OTHER_ENGINEERING)[1] + this.majorMap
+                .get(MajorEnum.OTHER_ENGINEERING)[0]));
 
         return ret;
 
@@ -300,45 +306,71 @@ public class Glyph {
      * US Heard, Northeast US Like, Southeast US Like,
      * Outside The US Like, The Rest Of US Like
      * 
-     * @return int[] of the ratios
+     * @return double[] of the ratios
      */
 
     public Double[] getRatioByRegion() {
 
         Double[] ret = new Double[8];
-        ret[0] = checkRatio(this.regionMap.get(Region.NORTHEAST_US)[3],
-            (this.regionMap.get(Region.NORTHEAST_US)[3] + this.regionMap.get(
-                Region.NORTHEAST_US)[2]));
+        ret[0] = checkRatio(this.regionMap.get(RegionEnum.NORTHEAST_US)[3],
+            (this.regionMap.get(RegionEnum.NORTHEAST_US)[3] + this.regionMap
+                .get(RegionEnum.NORTHEAST_US)[2]));
 
-        ret[1] = checkRatio(this.regionMap.get(Region.SOUTHEAST_US)[3],
-            (this.regionMap.get(Region.SOUTHEAST_US)[3] + this.regionMap.get(
-                Region.SOUTHEAST_US)[2]));
+        ret[1] = checkRatio(this.regionMap.get(RegionEnum.SOUTHEAST_US)[3],
+            (this.regionMap.get(RegionEnum.SOUTHEAST_US)[3] + this.regionMap
+                .get(RegionEnum.SOUTHEAST_US)[2]));
 
-        ret[2] = checkRatio(this.regionMap.get(Region.OUTSIDE_THE_US)[3],
-            (this.regionMap.get(Region.OUTSIDE_THE_US)[3] + this.regionMap.get(
-                Region.OUTSIDE_THE_US)[2]));
+        ret[3] = checkRatio(this.regionMap.get(RegionEnum.OUTSIDE_THE_US)[3],
+            (this.regionMap.get(RegionEnum.OUTSIDE_THE_US)[3] + this.regionMap
+                .get(RegionEnum.OUTSIDE_THE_US)[2]));
 
-        ret[3] = checkRatio(this.regionMap.get(Region.THE_REST_OF_US)[3],
-            (this.regionMap.get(Region.THE_REST_OF_US)[3] + this.regionMap.get(
-                Region.THE_REST_OF_US)[2]));
+        ret[2] = checkRatio(this.regionMap.get(RegionEnum.THE_REST_OF_US)[3],
+            (this.regionMap.get(RegionEnum.THE_REST_OF_US)[3] + this.regionMap
+                .get(RegionEnum.THE_REST_OF_US)[2]));
 
-        ret[4] = checkRatio(this.regionMap.get(Region.NORTHEAST_US)[1],
-            (this.regionMap.get(Region.NORTHEAST_US)[1] + this.regionMap.get(
-                Region.NORTHEAST_US)[0]));
+        ret[4] = checkRatio(this.regionMap.get(RegionEnum.NORTHEAST_US)[1],
+            (this.regionMap.get(RegionEnum.NORTHEAST_US)[1] + this.regionMap
+                .get(RegionEnum.NORTHEAST_US)[0]));
 
-        ret[5] = checkRatio(this.regionMap.get(Region.SOUTHEAST_US)[1],
-            (this.regionMap.get(Region.SOUTHEAST_US)[1] + this.regionMap.get(
-                Region.SOUTHEAST_US)[0]));
+        ret[5] = checkRatio(this.regionMap.get(RegionEnum.SOUTHEAST_US)[1],
+            (this.regionMap.get(RegionEnum.SOUTHEAST_US)[1] + this.regionMap
+                .get(RegionEnum.SOUTHEAST_US)[0]));
 
-        ret[6] = checkRatio(this.regionMap.get(Region.OUTSIDE_THE_US)[1],
-            (this.regionMap.get(Region.OUTSIDE_THE_US)[1] + this.regionMap.get(
-                Region.OUTSIDE_THE_US)[0]));
+        ret[7] = checkRatio(this.regionMap.get(RegionEnum.OUTSIDE_THE_US)[1],
+            (this.regionMap.get(RegionEnum.OUTSIDE_THE_US)[1] + this.regionMap
+                .get(RegionEnum.OUTSIDE_THE_US)[0]));
 
-        ret[7] = checkRatio(this.regionMap.get(Region.THE_REST_OF_US)[1],
-            (this.regionMap.get(Region.THE_REST_OF_US)[1] + this.regionMap.get(
-                Region.THE_REST_OF_US)[0]));
+        ret[6] = checkRatio(this.regionMap.get(RegionEnum.THE_REST_OF_US)[1],
+            (this.regionMap.get(RegionEnum.THE_REST_OF_US)[1] + this.regionMap
+                .get(RegionEnum.THE_REST_OF_US)[0]));
 
         return ret;
+
+    }
+
+
+    /**
+     * returns a double of ratios based on the string given
+     * 
+     * @param rep
+     *            the string of the representation (hobby, major, region)
+     * @return double[] of that representation or null
+     */
+    public Double[] getRatioBy(String rep) {
+
+        if (rep.equals("Hobby")) {
+            return this.getRatioByHobby();
+        }
+        else if (rep.equals("Major")) {
+            return this.getRatioByMajor();
+        }
+        else if (rep.equals("Region")) {
+
+            return this.getRatioByRegion();
+        }
+        else {
+            return null;
+        }
 
     }
 
@@ -365,47 +397,7 @@ public class Glyph {
         ret.append("reading:" + (int)(byHobby[4] * 100) + " art:"
             + (int)(byHobby[5] * 100) + " sports:" + (int)(byHobby[6] * 100)
             + " music:" + (int)(byHobby[7] * 100) + "\n");
-/*
- * ret.append(Hobby.ART.toString() + " | Yes: " + this.hobbyMap.get(
- * Hobby.ART)[1] + " | No: " + this.hobbyMap.get(Hobby.ART)[0] + "\n");
- * ret.append(Hobby.MUSIC.toString() + " | Yes: " + this.hobbyMap.get(
- * Hobby.MUSIC)[1] + " | No: " + this.hobbyMap.get(Hobby.MUSIC)[0]
- * + "\n");
- * ret.append(Hobby.SPORTS.toString() + " | Yes: " + this.hobbyMap.get(
- * Hobby.SPORTS)[1] + " | No: " + this.hobbyMap.get(Hobby.SPORTS)[0]
- * + "\n");
- * ret.append(Hobby.READ.toString() + " | Yes: " + this.hobbyMap.get(
- * Hobby.READ)[1] + " | No: " + this.hobbyMap.get(Hobby.READ)[0]
- * + "\n\n");
- * 
- * ret.append("By Major\n\n");
- * ret.append(Major.COMPUTER_SCIENCE.toString() + " | Yes: "
- * + this.majorMap.get(Major.COMPUTER_SCIENCE)[1] + " | No: "
- * + this.majorMap.get(Major.COMPUTER_SCIENCE)[0] + "\n");
- * ret.append(Major.MATH_OR_CMDA.toString() + " | Yes: " + this.majorMap
- * .get(Major.MATH_OR_CMDA)[1] + " | No: " + this.majorMap.get(
- * Major.MATH_OR_CMDA)[0] + "\n");
- * ret.append(Major.OTHER.toString() + " | Yes: " + this.majorMap.get(
- * Major.OTHER)[1] + " | No: " + this.majorMap.get(Major.OTHER)[0]
- * + "\n");
- * ret.append(Major.OTHER_ENGINEERING.toString() + " | Yes: "
- * + this.majorMap.get(Major.OTHER_ENGINEERING)[1] + " | No: "
- * + this.majorMap.get(Major.OTHER_ENGINEERING)[0] + "\n\n");
- * 
- * ret.append("By Region\n\n");
- * ret.append(Region.NORTHEAST_US.toString() + " | Yes: " + this.regionMap
- * .get(Region.NORTHEAST_US)[1] + " | No: " + this.regionMap.get(
- * Region.NORTHEAST_US)[0] + "\n");
- * ret.append(Region.SOUTHEAST_US.toString() + " | Yes: " + this.regionMap
- * .get(Region.SOUTHEAST_US)[1] + " | No: " + this.regionMap.get(
- * Region.SOUTHEAST_US)[0] + "\n");
- * ret.append(Region.THE_REST_OF_US.toString() + " | Yes: "
- * + this.regionMap.get(Region.THE_REST_OF_US)[1] + " | No: "
- * + this.regionMap.get(Region.THE_REST_OF_US)[0] + "\n");
- * ret.append(Region.OUTSIDE_THE_US.toString() + " | Yes: "
- * + this.regionMap.get(Region.OUTSIDE_THE_US)[1] + " | No: "
- * + this.regionMap.get(Region.OUTSIDE_THE_US)[0] + "\n\n");
- */
+
         return ret.toString();
 
     }

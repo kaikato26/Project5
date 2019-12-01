@@ -4,7 +4,6 @@
 package prj5;
 
 import java.awt.Color;
-import java.util.HashMap;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
@@ -19,7 +18,7 @@ public class GUIMusicWindow {
     public static final int GLYPH_OFFSET_X = 150;
     public static final int GLYPH_OFFSET_Y = 120;
     public static final int GLYPH_GAP_Y = 50;
-    public static final int GLYPH_INCREMENT_X = 5;
+    public static final int GLYPH_INCREMENT_X = 2;
     public static final int GLYPH_BAR_HEIGHT = BLACK_BAR_HEIGHT / 4;
     public static final int GLYPH_BAR_WIDTH = 15;
     public static final int GLYPH_BAR_EXAMPLE_NUMBER = 15;
@@ -31,10 +30,10 @@ public class GUIMusicWindow {
     public static final int LEGEND_HEIGHT = 350;
     public static final int LEGEND_TEXT_OFFSET = 20;
 
-    public static final Color EXAMPLE_ATTRIBUTE1 = Color.blue;
-    public static final Color EXAMPLE_ATTRIBUTE2 = Color.orange;
-    public static final Color EXAMPLE_ATTRIBUTE3 = Color.green;
-    public static final Color EXAMPLE_ATTRIBUTE4 = Color.red;
+    public static final Color EXAMPLE_ATTRIBUTE1 = Color.PINK;
+    public static final Color EXAMPLE_ATTRIBUTE2 = Color.BLUE;
+    public static final Color EXAMPLE_ATTRIBUTE3 = Color.YELLOW;
+    public static final Color EXAMPLE_ATTRIBUTE4 = Color.GREEN;
 
     private Window window;
     private Button repHobby;
@@ -48,8 +47,26 @@ public class GUIMusicWindow {
     private Button byYear;
     private Button byTitle;
 
+    private MusicCalculator musicCalc;
+    private int counter;
 
-    public GUIMusicWindow() {
+    private int currentPage;
+    private String repBy;
+    private String attOne;
+    private String attTwo;
+    private String attThree;
+    private String attFour;
+    private int numPages;
+
+
+    public GUIMusicWindow(MusicReader reader) {
+        this.currentPage = 0;
+        this.musicCalc = reader.getMusicCalc();
+        this.numPages = (this.musicCalc.getGlyphList().size() / 9);
+        if (this.musicCalc.getGlyphList().size() % 9 == 0) {
+            numPages--;
+        }
+
         this.window = new Window("kaikato26 anamkung Samhita7");
         repHobby = new Button("Represent Hobby");
         repRegion = new Button("Represent Region");
@@ -76,20 +93,26 @@ public class GUIMusicWindow {
 
         // Creates the blackbars, stay constant
         window.setSize(1920, 1040);
-        for (int row = 1; row < 4; row++) {
-            for (int column = 1; column < 4; column++) {
-                Shape blackBar = new Shape(window.getGraphPanelWidth() / 4
-                    * column - GLYPH_OFFSET_X, row * window
-                        .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
-                        - GLYPH_OFFSET_Y, BLACK_BAR_WIDTH, BLACK_BAR_HEIGHT,
-                    Color.black);
-                window.addShape(blackBar);
-            }
-        }
 
-        this.glyphBars();
+        this.quit.onClick(this, "clickedQuit");
+        this.next.onClick(this, "clickedNext");
+        this.prev.onClick(this, "clickedPrev");
+        this.repHobby.onClick(this, "clickedRepHobby");
+        this.repMajor.onClick(this, "clickedRepMajor");
+        this.repRegion.onClick(this, "clickedRepRegion");
 
-        // Legend box
+        this.byArtist.onClick(this, "clickedSortByArtist");
+        this.byGenre.onClick(this, "clickedSortByGenere");
+        this.byTitle.onClick(this, "clickedSortByTitle");
+        this.byYear.onClick(this, "clickedSortByYear");
+
+        this.prev.disable();
+
+    }
+
+
+    private void legendText() {
+
         Shape legendOutside = new Shape(LEGEND_X_LOC, LEGEND_Y_LOC,
             LEGEND_WIDTH, LEGEND_HEIGHT, Color.black);
         window.addShape(legendOutside);
@@ -100,7 +123,6 @@ public class GUIMusicWindow {
         window.moveToFront(legendInside);
 
         // Legend text
-        this.legendText();
 
         Shape legendBlackBar = new Shape(LEGEND_X_LOC + LEGEND_WIDTH / 2
             - (BLACK_BAR_WIDTH / 2), LEGEND_Y_LOC + 180, BLACK_BAR_WIDTH,
@@ -126,30 +148,24 @@ public class GUIMusicWindow {
         window.moveToFront(songTitleText);
         window.moveToFront(heardText);
         window.moveToFront(likesText);
-    }
 
-
-    private void update() {
-
-    }
-
-
-    private void legendText() {
         TextShape attribute1Text = new TextShape(LEGEND_X_LOC
             + LEGEND_TEXT_OFFSET, LEGEND_Y_LOC + LEGEND_TEXT_OFFSET * 2,
-            "ATTRIBUTE 1");
+            this.attOne);
         TextShape attribute2Text = new TextShape(LEGEND_X_LOC
             + LEGEND_TEXT_OFFSET, LEGEND_Y_LOC + LEGEND_TEXT_OFFSET * 3,
-            "ATTRIBUTE 2");
+            this.attTwo);
         TextShape attribute3Text = new TextShape(LEGEND_X_LOC
             + LEGEND_TEXT_OFFSET, LEGEND_Y_LOC + LEGEND_TEXT_OFFSET * 4,
-            "ATTRIBUTE 3");
+            this.attThree);
         TextShape attribute4Text = new TextShape(LEGEND_X_LOC
             + LEGEND_TEXT_OFFSET, LEGEND_Y_LOC + LEGEND_TEXT_OFFSET * 5,
-            "ATTRIBUTE 4");
+            this.attFour);
 
-        TextShape legendText = new TextShape(LEGEND_X_LOC + LEGEND_TEXT_OFFSET,
-            LEGEND_Y_LOC + LEGEND_TEXT_OFFSET, " Legend");
+        TextShape legendText = new TextShape(LEGEND_X_LOC +
+
+            LEGEND_TEXT_OFFSET, LEGEND_Y_LOC + LEGEND_TEXT_OFFSET, this.repBy
+                + " Legend");
 
         attribute1Text.setBackgroundColor(Color.white);
         attribute2Text.setBackgroundColor(Color.white);
@@ -177,64 +193,98 @@ public class GUIMusicWindow {
 
 
     private void glyphBars() {
+
         for (int row = 1; row < 4; row++) {
             for (int column = 1; column < 4; column++) {
+
+                if (counter == this.musicCalc.getGlyphList().size()) {
+                    break;
+                }
+
+                Double[] ratios = this.musicCalc.getGlyphList().get(counter)
+                    .getRatioBy(repBy);
+                // creates black bars
+                Shape blackBar = new Shape(window.getGraphPanelWidth() / 4
+                    * column - GLYPH_OFFSET_X, row * window
+                        .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
+                        - GLYPH_OFFSET_Y, BLACK_BAR_WIDTH, BLACK_BAR_HEIGHT,
+                    Color.black);
+                window.addShape(blackBar);
+
+                // creates data bars
                 Shape glyphBar1R = new Shape(window.getGraphPanelWidth() / 4
                     * column - GLYPH_OFFSET_X + BLACK_BAR_WIDTH, row * window
                         .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                         - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 0),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[4] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE1);
                 Shape glyphBar2R = new Shape(window.getGraphPanelWidth() / 4
                     * column - GLYPH_OFFSET_X + BLACK_BAR_WIDTH, row * window
                         .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                         - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 1),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[5] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE2);
                 Shape glyphBar3R = new Shape(window.getGraphPanelWidth() / 4
                     * column - GLYPH_OFFSET_X + BLACK_BAR_WIDTH, row * window
                         .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                         - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 2),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[6] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE3);
                 Shape glyphBar4R = new Shape(window.getGraphPanelWidth() / 4
                     * column - GLYPH_OFFSET_X + BLACK_BAR_WIDTH, row * window
                         .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                         - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 3),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[7] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE4);
 
                 Shape glyphBar1L = new Shape(window.getGraphPanelWidth() / 4
-                    * column - GLYPH_OFFSET_X - GLYPH_INCREMENT_X
-                        * GLYPH_BAR_EXAMPLE_NUMBER, row * window
+                    * column - GLYPH_OFFSET_X - (GLYPH_INCREMENT_X
+                        * ((int)(ratios[0] * 100))), row * window
                             .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                             - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 0),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[0] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE1);
 
                 Shape glyphBar2L = new Shape(window.getGraphPanelWidth() / 4
-                    * column - GLYPH_OFFSET_X - GLYPH_INCREMENT_X
-                        * GLYPH_BAR_EXAMPLE_NUMBER, row * window
+                    * column - GLYPH_OFFSET_X - (GLYPH_INCREMENT_X
+                        * ((int)(ratios[1] * 100))), row * window
                             .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                             - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 1),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[1] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE2);
 
                 Shape glyphBar3L = new Shape(window.getGraphPanelWidth() / 4
-                    * column - GLYPH_OFFSET_X - GLYPH_INCREMENT_X
-                        * GLYPH_BAR_EXAMPLE_NUMBER, row * window
+                    * column - GLYPH_OFFSET_X - (GLYPH_INCREMENT_X
+                        * ((int)(ratios[2] * 100))), row * window
                             .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                             - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 2),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[2] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE3);
 
                 Shape glyphBar4L = new Shape(window.getGraphPanelWidth() / 4
-                    * column - GLYPH_OFFSET_X - GLYPH_INCREMENT_X
-                        * GLYPH_BAR_EXAMPLE_NUMBER, row * window
+                    * column - GLYPH_OFFSET_X - (GLYPH_INCREMENT_X
+                        * ((int)(ratios[3] * 100))), row * window
                             .getGraphPanelHeight() / 4 + (row * GLYPH_GAP_Y)
                             - GLYPH_OFFSET_Y + (GLYPH_BAR_HEIGHT * 3),
-                    GLYPH_INCREMENT_X * GLYPH_BAR_EXAMPLE_NUMBER,
+                    (GLYPH_INCREMENT_X * ((int)(ratios[3] * 100))),
                     GLYPH_BAR_HEIGHT, EXAMPLE_ATTRIBUTE4);
+
+                TextShape exampleSong = new TextShape(window
+                    .getGraphPanelWidth() / 4 * column - GLYPH_OFFSET_X - 30,
+                    (row * window.getGraphPanelHeight() / 4 + (row
+                        * GLYPH_GAP_Y) - GLYPH_OFFSET_Y) - 60, this.musicCalc
+                            .getGlyphList().get(counter).getSong().getTitle());
+                TextShape exampleArtist = new TextShape(window
+                    .getGraphPanelWidth() / 4 * column - GLYPH_OFFSET_X - 16,
+                    (row * window.getGraphPanelHeight() / 4 + (row
+                        * GLYPH_GAP_Y) - GLYPH_OFFSET_Y) - 40, this.musicCalc
+                            .getGlyphList().get(counter).getSong().getArtist());
+
+                exampleSong.setBackgroundColor(Color.white);
+                exampleArtist.setBackgroundColor(Color.white);
+
+                window.addShape(exampleSong);
+                window.addShape(exampleArtist);
 
                 window.addShape(glyphBar1R);
                 window.addShape(glyphBar2R);
@@ -244,69 +294,135 @@ public class GUIMusicWindow {
                 window.addShape(glyphBar2L);
                 window.addShape(glyphBar3L);
                 window.addShape(glyphBar4L);
+
+                counter++;
             }
         }
-
-        TextShape exampleSong = new TextShape(window.getGraphPanelWidth() / 4
-            - GLYPH_OFFSET_X - BLACK_BAR_WIDTH, 115, "Kid Cudi");
-        TextShape exampleArtist = new TextShape(window.getGraphPanelWidth() / 4
-            - GLYPH_OFFSET_X - BLACK_BAR_WIDTH - 20, 130, "by Playboi Carti");
-
-        exampleSong.setBackgroundColor(Color.white);
-        exampleArtist.setBackgroundColor(Color.white);
-
-        window.addShape(exampleSong);
-        window.addShape(exampleArtist);
 
     }
 
 
     public void clickedRepHobby(Button button) {
+        this.repBy = "Hobby";
 
+        this.attOne = "Read";
+        this.attTwo = "Art";
+        this.attThree = "Sports";
+        this.attFour = "Music";
+        this.window.removeAllShapes();
+        this.glyphBars();
+        this.legendText();
+        this.counter = this.currentPage * 9;
     }
 
 
     public void clickedRepRegion(Button button) {
-
+        this.repBy = "Region";
+        this.attOne = "Northeast US";
+        this.attTwo = "Southeast US";
+        this.attFour = "Outside the US";
+        this.attThree = "The Rest Of US";
+        this.window.removeAllShapes();
+        this.glyphBars();
+        this.legendText();
+        this.counter = this.currentPage * 9;
     }
 
 
     public void clickedRepMajor(Button button) {
-
+        this.repBy = "Major";
+        this.attOne = "Computer Science";
+        this.attThree = "CMDA or Math";
+        this.attFour = "Other";
+        this.attTwo = "Other Engineering";
+        this.window.removeAllShapes();
+        this.glyphBars();
+        this.legendText();
+        this.counter = this.currentPage * 9;
     }
 
 
     public void clickedQuit(Button button) {
-
+        System.exit(0);
     }
 
 
     public void clickedPrev(Button button) {
+        if (this.currentPage == 0) {
+            this.prev.disable();
+            return;
+        }
+        this.currentPage--;
+        if (0 == this.currentPage) {
+            this.prev.disable();
+        }
+        this.next.enable();
+
+        this.counter = this.currentPage * 9;
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
 
     }
 
 
     public void clickedNext(Button button) {
 
+        if (this.numPages == this.currentPage) {
+            this.next.disable();
+            return;
+        }
+        this.currentPage++;
+        if (this.numPages == this.currentPage) {
+            this.next.disable();
+        }
+        this.counter = this.currentPage * 9;
+        this.prev.enable();
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
+
     }
 
 
-    public void clickedbyArtist(Button button) {
+    public void clickedSortByArtist(Button button) {
 
+        this.musicCalc.sortGlyphs("artist");
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
     }
 
 
-    public void clickedbyGenere(Button button) {
+    public void clickedSortByGenere(Button button) {
 
+        this.musicCalc.sortGlyphs("genre");
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
     }
 
 
-    public void clickedbyYear(Button button) {
+    public void clickedSortByYear(Button button) {
 
+        this.musicCalc.sortGlyphs("date");
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
     }
 
 
-    public void clickedByTitle(Button button) {
+    public void clickedSortByTitle(Button button) {
 
+        this.musicCalc.sortGlyphs("title");
+        this.window.removeAllShapes();
+        this.legendText();
+        this.glyphBars();
+        this.counter = this.currentPage * 9;
     }
 }

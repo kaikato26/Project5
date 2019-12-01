@@ -79,7 +79,7 @@ public class GlyphTest extends student.TestCase {
         glyph2.getRatioByRegion();
         // System.out.println(glyph2);
 
-        assertEquals(glyph2.getHobbyMap().get(Hobby.ART)[0], 1);
+        assertEquals(glyph2.getHobbyMap().get(HobbyEnum.ART)[0], 1);
 
     }
 
@@ -99,11 +99,11 @@ public class GlyphTest extends student.TestCase {
      */
     public void testGetHobbyMap() {
 
-        HashMap<Hobby, int[]> hobbyMap = new HashMap<Hobby, int[]>();
-        hobbyMap.put(Hobby.ART, new int[4]);
-        hobbyMap.put(Hobby.READ, new int[4]);
-        hobbyMap.put(Hobby.SPORTS, new int[4]);
-        hobbyMap.put(Hobby.MUSIC, new int[4]);
+        HashMap<HobbyEnum, int[]> hobbyMap = new HashMap<HobbyEnum, int[]>();
+        hobbyMap.put(HobbyEnum.ART, new int[4]);
+        hobbyMap.put(HobbyEnum.READ, new int[4]);
+        hobbyMap.put(HobbyEnum.SPORTS, new int[4]);
+        hobbyMap.put(HobbyEnum.MUSIC, new int[4]);
 
         Glyph test = new Glyph(song1);
         assertEquals(test.getHobbyMap().keySet(), hobbyMap.keySet());
@@ -116,11 +116,11 @@ public class GlyphTest extends student.TestCase {
      */
     public void testGetMajorMap() {
 
-        HashMap<Major, int[]> majorMap = new HashMap<Major, int[]>();
-        majorMap.put(Major.COMPUTER_SCIENCE, new int[4]);
-        majorMap.put(Major.MATH_OR_CMDA, new int[4]);
-        majorMap.put(Major.OTHER, new int[4]);
-        majorMap.put(Major.OTHER_ENGINEERING, new int[4]);
+        HashMap<MajorEnum, int[]> majorMap = new HashMap<MajorEnum, int[]>();
+        majorMap.put(MajorEnum.COMPUTER_SCIENCE, new int[4]);
+        majorMap.put(MajorEnum.MATH_OR_CMDA, new int[4]);
+        majorMap.put(MajorEnum.OTHER, new int[4]);
+        majorMap.put(MajorEnum.OTHER_ENGINEERING, new int[4]);
 
         Glyph test = new Glyph(song1);
         assertEquals(test.getMajorMap().keySet(), majorMap.keySet());
@@ -133,11 +133,11 @@ public class GlyphTest extends student.TestCase {
      */
     public void testGetRegionMap() {
 
-        HashMap<Region, int[]> regionMap = new HashMap<Region, int[]>();
-        regionMap.put(Region.NORTHEAST_US, new int[4]);
-        regionMap.put(Region.SOUTHEAST_US, new int[4]);
-        regionMap.put(Region.OUTSIDE_THE_US, new int[4]);
-        regionMap.put(Region.THE_REST_OF_US, new int[4]);
+        HashMap<RegionEnum, int[]> regionMap = new HashMap<RegionEnum, int[]>();
+        regionMap.put(RegionEnum.NORTHEAST_US, new int[4]);
+        regionMap.put(RegionEnum.SOUTHEAST_US, new int[4]);
+        regionMap.put(RegionEnum.OUTSIDE_THE_US, new int[4]);
+        regionMap.put(RegionEnum.THE_REST_OF_US, new int[4]);
 
         Glyph test = new Glyph(song1);
         assertEquals(test.getRegionMap().keySet(), regionMap.keySet());
@@ -147,6 +147,7 @@ public class GlyphTest extends student.TestCase {
 
     /**
      * tests the get ratio methods for hobby, major, and region
+     * also tests the getRatioBy Method
      */
     public void testGetRatio() {
 
@@ -157,6 +158,10 @@ public class GlyphTest extends student.TestCase {
         assertEquals(glyph1.getRatioByMajor()[1], maj[1], 2);
         Double[] reg = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
         assertEquals(glyph1.getRatioByRegion()[1], reg[1], 2);
+        assertEquals(glyph1.getRatioBy("Hobby")[1], hob[1], 2);
+        assertEquals(glyph1.getRatioBy("Region")[1], reg[1], 2);
+        assertEquals(glyph1.getRatioBy("Major")[1], maj[1], 2);
+        assertNull(glyph1.getRatioBy("yeet"));
     }
 
 

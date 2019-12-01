@@ -45,10 +45,10 @@ public class PersonTest extends student.TestCase {
      */
     public void testGetHobby() {
 
-        assertEquals(test5.getHobby(), Hobby.ART);
-        assertEquals(test6.getHobby(), Hobby.READ);
-        assertEquals(test7.getHobby(), Hobby.MUSIC);
-        assertEquals(test8.getHobby(), Hobby.SPORTS);
+        assertEquals(test5.getHobby(), HobbyEnum.ART);
+        assertEquals(test6.getHobby(), HobbyEnum.READ);
+        assertEquals(test7.getHobby(), HobbyEnum.MUSIC);
+        assertEquals(test8.getHobby(), HobbyEnum.SPORTS);
 
     }
 
@@ -58,10 +58,10 @@ public class PersonTest extends student.TestCase {
      */
     public void testGetMajor() {
 
-        assertEquals(test5.getMajor(), Major.COMPUTER_SCIENCE);
-        assertEquals(test6.getMajor(), Major.MATH_OR_CMDA);
-        assertEquals(test7.getMajor(), Major.OTHER);
-        assertEquals(test8.getMajor(), Major.OTHER_ENGINEERING);
+        assertEquals(test5.getMajor(), MajorEnum.COMPUTER_SCIENCE);
+        assertEquals(test6.getMajor(), MajorEnum.MATH_OR_CMDA);
+        assertEquals(test7.getMajor(), MajorEnum.OTHER);
+        assertEquals(test8.getMajor(), MajorEnum.OTHER_ENGINEERING);
 
     }
 
@@ -71,10 +71,10 @@ public class PersonTest extends student.TestCase {
      */
     public void testGetRegion() {
 
-        assertEquals(test5.getRegion(), Region.SOUTHEAST_US);
-        assertEquals(test6.getRegion(), Region.NORTHEAST_US);
-        assertEquals(test7.getRegion(), Region.THE_REST_OF_US);
-        assertEquals(test8.getRegion(), Region.OUTSIDE_THE_US);
+        assertEquals(test5.getRegion(), RegionEnum.SOUTHEAST_US);
+        assertEquals(test6.getRegion(), RegionEnum.NORTHEAST_US);
+        assertEquals(test7.getRegion(), RegionEnum.THE_REST_OF_US);
+        assertEquals(test8.getRegion(), RegionEnum.OUTSIDE_THE_US);
 
     }
 
